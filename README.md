@@ -34,6 +34,8 @@ An elimination diet capstone is a Django application for the purpose of allowing
             - Time of day
         - User mood
     - Edit Entry
+        - Update
+        - Delete
 - Allergen guide
     - Sidebar
 
