@@ -4,117 +4,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Hello World!</title>
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .row {
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Page Content -->
-    <div id="app" class="conatainer">
+    <div class="container">
         <div class="row center">
-            <div>
-                <h3>[[ title ]]</h3>
+            <div class="row">
+                <h4>Register</h4>
             </div>
-            <div class="input-field col s12">
-                <input id="input_username" type="text" class="validate" v-model="username" required>
-                <label for="input_username">Username</label>
-            </div>
-            <div class="input-field col s12">
-                <input id="input_first_name" type="text" class="validate" v-model="first_name" required>
-                <label for="input_first_name">First Name</label>
-            </div>
-            <div class="input-field  col s12">
-                <input id="input_last_name" type="text" class="validate" v-model="last_name" required>
-                <label for="input_last_name">Last Name</label>
-            </div>
-            <div class="input-field col s12">
-                <input id="input_email" type="text" class="validate" v-model="email" required>
-                <label for="input_email">Email</label>
-            </div>
-            <div class="input-field col s12">
-                <input id="input_password" type="text" class="validate" v-model="password" required>
-                <label for="input_password">Password</label>
-            </div>
-            <div class="input-field col s12">
-                <input id="input_rt_password" type="text" class="validate" v-model="rt_password" required>
-                <label for="input_rt_password">Retype Password</label>
-            </div>
-            <form action="#">
-                <div class="file-field input-field col s12">
-                    <div class="btn">
-                        <span>File</span>
-                        <input type="file">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" v-model="photo" placeholder="Upload Image">
+            <form id="register_form" action="{% url 'users:register' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- username -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="input_username" type="text" class="validate" name="username" required>
+                        <label for="input_username">Username</label>
                     </div>
                 </div>
+                <div class="row">
+                    <!-- first_name -->
+                    <div class="input-field col s12">
+                        <input id="input_first_name" type="text" class="validate" name="first_name" required>
+                        <label for="input_first_name">First Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- last_name -->
+                    <div class="input-field  col s12">
+                        <input id="input_last_name" type="text" class="validate" name="last_name" required>
+                        <label for="input_last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- email -->
+                    <div class="input-field col s12">
+                        <input id="input_email" type="text" class="validate" name="email" required>
+                        <label for="input_email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- password -->
+                    <div class="input-field col s12">
+                        <input id="input_password" type="text" class="validate" name="password" required>
+                        <label for="input_password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- rt_password -->
+                    <div class="input-field col s12">
+                        <input id="input_confirm_password" type="text" class="validate" name="confirm_password"
+                            required>
+                        <label for="input_confirm_password">Retype Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- add photo -->
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input id="input_photo" type="text" class="file-path validate" name="photo"
+                                placeholder="Upload Profile Image">
+                        </div>
+                    </div>
+                </div>
+                <!-- submit -->
+                <div class="input-field col s12">
+                    <button class="btn" id="register_button" type="submit">Submit</button>
+                </div>
             </form>
-            <div class="input-field col s12">
-                <button class="btn" v-on:click="registerUser">Register</button>
-            </div>
         </div>
     </div>
+
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Vue JS -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
-    <!-- Axios JS -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
     <!-- Page JS -->
     <script type="text/javascript">
         // initialize Materialize components
         M.AutoInit()
 
-        // let app = new Vue({
-        //     el: '#app',
-        //     delimiters: ["[[", "]]"],
-        //     data: {
-        //         title: 'Register',
-        //         message: "",
-        //         user: {},
-        //         username: '',
-        //         first_name: '',
-        //         last_name: '',
-        //         email: '',
-        //         password: '',
-        //         rt_password: '',
-        //         photo: '',
-        //     },
-        //     methods: {
-        //         registerUser: function () {
-        //             if (this.password != this.rt_password) {
-        //                 alert('Passwords don\'t match')
-        //                 return
-        //             }
-        //             axios({
-        //                 method: 'post',
-        //                 url: '{% url "users:register" %}',
-        //                 headers: {
-        //                     'X-CSRFToken': '{{ csrf_token }}'
-        //                 },
-        //                 data: {
-        //                     username: this.username,
-        //                     first_name: this.first_name,
-        //                     last_name: this.last_name,
-        //                     email: this.email,
-        //                     password: this.password,
-        //                     photo: this.photo,
-        //                 }
-        //             }).then(response => {
-        //                 console.log(response.data)
-        //                 this.username = ''
-        //                 this.first_name = ''
-        //                 this.last_name = ''
-        //                 this.email = ''
-        //                 this.password = ''
-        //                 this.rt_password = ''
-        //                 this.photo = ''
-        //             })
-        //         }
-        //     }
-        // })
+        let input_password = document.querySelector('#input_password')
+        console.log(input_password)
+        let input_confirm_password = document.querySelector('#input_confirm_password')
+        console.log(input_confirm_password)
+        let register_button = document.querySelector('#register_button')
+        register_button.addEventListener('click', function (event) {
+            if (input_password.value != input_confirm_password.value) {
+                alert('passwords don\'t match')
+                event.preventDefault();
+
+            } else {
+                alert('passwords match')
+                document.getElementById("register_form").submit();
+            }
+        })
     </script>
 </body>
 

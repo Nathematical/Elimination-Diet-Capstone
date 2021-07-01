@@ -1,20 +1,26 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, reverse
+from django.http import HttpResponseRedirect
 from .models import User
-import json
+import django.contrib.auth
 
 def register(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        print(request.body)
-        user = User.objects.create_user(
-            username=data['username'], 
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            email=data['email'], 
-            password=data['password'])
-        user.photo = data['photo']
+        print(request.POST)
+        username = request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        photo = request.FILES.get('photo')
+        print(request.FILES)
+        password = request.POST['password']
+        user = User.objects.create_user(username, email, password)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.photo = photo
         user.save()
-        return render(request, 'users/register.html')
-    else:
-        return render(request, 'users/register.html')
+        django.contrib.auth.login(request, user)
+        return HttpResponseRedirect(reverse('dietjournal:index'))
+
+    return render(request, 'users/register.html')
+
+        
