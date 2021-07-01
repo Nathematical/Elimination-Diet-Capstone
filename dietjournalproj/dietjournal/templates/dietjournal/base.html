@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<style>
+</style>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{% url 'dietjournal:index' %}" class="brand-logo center">Diet Journal</a>
+            <ul id="nav-mobile" class="right hide-on-sm-and-down">
+                {% if user.is_authenticated %}
+                <li><a href="">Profile</a></li>
+                <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'users:login' %}">Profile</a></li>
+                {% endif %}
+                <li>{% block link %}{% endblock %}</li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <div class="center">
+        <h4>{% block title %}{% endblock %}</h4>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+        });
+    </script>
+    <!-- Page JS -->
+    {% block js %}
+    {% endblock %}
+</body>
+<footer>
+    <div class="center">
+        <span>&copy; Class Eagle 2021</span>
+    </div>
+</footer>
+
+</html>

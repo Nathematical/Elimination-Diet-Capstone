@@ -1,114 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'dietjournal/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World!</title>
-    <!-- Materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <style>
-        .row {
-            margin-bottom: 0;
-        }
-    </style>
-</head>
+{% block title %}Register{% endblock %}
 
-<body>
-    <div class="container">
-        <div class="row center">
+{% block content %}
+<div class="container">
+    <div class="row center">
+        <form id="register_form" action="{% url 'users:register' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- username -->
             <div class="row">
-                <h4>Register</h4>
-            </div>
-            <form id="register_form" action="{% url 'users:register' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <!-- username -->
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="input_username" type="text" class="validate" name="username" required>
-                        <label for="input_username">Username</label>
-                    </div>
+                <div class="input-field col s12">
+                    <input id="input_username" type="text" class="validate" name="username" required>
+                    <label for="input_username">Username</label>
                 </div>
-                <div class="row">
-                    <!-- first_name -->
-                    <div class="input-field col s12">
-                        <input id="input_first_name" type="text" class="validate" name="first_name" required>
-                        <label for="input_first_name">First Name</label>
-                    </div>
+                <!-- first_name -->
+                <div class="input-field col s12">
+                    <input id="input_first_name" type="text" class="validate" name="first_name" required>
+                    <label for="input_first_name">First Name</label>
                 </div>
-                <div class="row">
-                    <!-- last_name -->
-                    <div class="input-field  col s12">
-                        <input id="input_last_name" type="text" class="validate" name="last_name" required>
-                        <label for="input_last_name">Last Name</label>
-                    </div>
+                <!-- last_name -->
+                <div class="input-field  col s12">
+                    <input id="input_last_name" type="text" class="validate" name="last_name" required>
+                    <label for="input_last_name">Last Name</label>
                 </div>
-                <div class="row">
-                    <!-- email -->
-                    <div class="input-field col s12">
-                        <input id="input_email" type="text" class="validate" name="email" required>
-                        <label for="input_email">Email</label>
-                    </div>
+                <!-- email -->
+                <div class="input-field col s12">
+                    <input id="input_email" type="text" class="validate" name="email" required>
+                    <label for="input_email">Email</label>
                 </div>
-                <div class="row">
-                    <!-- password -->
-                    <div class="input-field col s12">
-                        <input id="input_password" type="text" class="validate" name="password" required>
-                        <label for="input_password">Password</label>
-                    </div>
+                <!-- password -->
+                <div class="input-field col s12">
+                    <input id="input_password" type="text" class="validate" name="password" required>
+                    <label for="input_password">Password</label>
                 </div>
-                <div class="row">
-                    <!-- rt_password -->
-                    <div class="input-field col s12">
-                        <input id="input_confirm_password" type="text" class="validate" name="confirm_password"
-                            required>
-                        <label for="input_confirm_password">Retype Password</label>
-                    </div>
+                <!-- rt_password -->
+                <div class="input-field col s12">
+                    <input id="input_confirm_password" type="text" class="validate" name="confirm_password" required>
+                    <label for="input_confirm_password">Retype Password</label>
                 </div>
-                <div class="row">
-                    <!-- add photo -->
-                    <div class="file-field input-field col s12">
-                        <div class="btn">
-                            <span>File</span>
-                            <input type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input id="input_photo" type="text" class="file-path validate" name="photo"
-                                placeholder="Upload Profile Image">
-                        </div>
+                <!-- add photo -->
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="input_photo" type="text" class="file-path validate" name="photo"
+                            placeholder="Upload Profile Image">
                     </div>
                 </div>
                 <!-- submit -->
                 <div class="input-field col s12">
                     <button class="btn" id="register_button" type="submit">Submit</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
+{% endblock %}
 
-    <!-- Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Page JS -->
-    <script type="text/javascript">
-        // initialize Materialize components
-        M.AutoInit()
+{% block js %}
+<script type="text/javascript">
+    // initialize Materialize components
+    M.AutoInit()
 
-        let input_password = document.querySelector('#input_password')
-        console.log(input_password)
-        let input_confirm_password = document.querySelector('#input_confirm_password')
-        console.log(input_confirm_password)
-        let register_button = document.querySelector('#register_button')
-        register_button.addEventListener('click', function (event) {
-            if (input_password.value != input_confirm_password.value) {
-                alert('passwords don\'t match')
-                event.preventDefault();
+    let input_password = document.querySelector('#input_password')
+    console.log(input_password)
+    let input_confirm_password = document.querySelector('#input_confirm_password')
+    console.log(input_confirm_password)
+    let register_button = document.querySelector('#register_button')
+    register_button.addEventListener('click', function (event) {
+        if (input_password.value != input_confirm_password.value) {
+            alert('passwords don\'t match')
+            event.preventDefault();
 
-            } else {
-                alert('passwords match')
-                document.getElementById("register_form").submit();
-            }
-        })
-    </script>
-</body>
-
-</html>
+        } else {
+            alert('passwords match')
+            document.getElementById("register_form").submit();
+        }
+    })
+</script>
+{% endblock %}

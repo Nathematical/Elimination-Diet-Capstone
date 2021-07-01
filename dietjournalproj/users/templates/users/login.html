@@ -1,0 +1,27 @@
+{% extends 'dietjournal/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row center">
+        <form action="{% url 'users:login' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- input username -->
+            <div class="input-field col s12">
+                <input id="input_username" type="text" placeholder="username" name="username" required />
+                <label for="input_username">Username</label>
+            </div>
+            <!-- input password -->
+            <div class="input-field col s12">
+                <input id="input_password" type="password" placeholder="password" name="password" required />
+                <label for="input_password">Password</label>
+            </div>
+            <!-- submit -->
+            <div class="input-field col s12">
+                <button class="btn" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
