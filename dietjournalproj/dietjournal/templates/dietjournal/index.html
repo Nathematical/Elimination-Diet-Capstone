@@ -3,7 +3,18 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<div class="container">
+    <div class="row center">
+        <input type="text" class="datepicker">
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, options);
+    });
+</script>
 {% endblock %}
