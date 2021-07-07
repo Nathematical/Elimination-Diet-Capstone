@@ -2,8 +2,8 @@ from django.db import models
 from users.models import User
 
 class LogEntry(models.Model):
-    date_created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    date_created = models.DateTimeField(auto_now_add=True)
     date_edited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -13,10 +13,9 @@ class Meal(models.Model):
     location = models.CharField(max_length=200)
     meal_num = models.IntegerField()
     food_name = models.CharField(max_length=200)
-    day_time = models.DateTimeField(auto_now=True)
-    bowel_movement = models.IntegerField()
     mood = models.CharField(max_length=200)
     notes = models.TextField()
+    day_time = models.DateTimeField(auto_now=True)
     log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -26,8 +25,8 @@ class Snack(models.Model):
     location = models.CharField(max_length=200)
     snack_num = models.IntegerField()
     food_name = models.CharField(max_length=200)
-    day_time = models.DateTimeField(auto_now=True)
     notes = models.TextField()
+    day_time = models.DateTimeField(auto_now=True)
     log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -44,6 +43,7 @@ class Sleep(models.Model):
     
 class WaterConsumed(models.Model):
     h2o_oz = models.IntegerField()
+    day_time = models.DateTimeField(auto_now=True)
     log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -53,8 +53,18 @@ class Medication(models.Model):
     name = models.CharField(max_length=200)
     reason = models.CharField(max_length=200)
     dosage = models.CharField(max_length=200)
-    date_started = models.DateTimeField(auto_now=True)
     reaction = models.TextField()
+    day_time = models.DateTimeField(auto_now=True)
+    log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.dosage + '_' + self.name
+
+class BowelMovement(models.Model):
+    bm_num = models.IntegerField()
+    notes = models.TextField()
+    day_time = models.DateTimeField(auto_now=True)
+    log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.bm_num + '_' + self.day_time
