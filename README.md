@@ -58,11 +58,14 @@ An elimination diet capstone is a Django application for the purpose of allowing
 ## Schedule
 
 - Week 1
-  - [ ] create Models
-  - [ ] create user system - register, login, logout, Edit Profile
+  - [x] create Models
+  - [x] create user system - register, login, logout, Edit Profile
 - Week 2
   - [ ] Display Calendar
-  - [ ] Create Journal Entry 
+    - [ ] FullCalendar
+  - [ ] Create Journal Entry
+    - [ ] HTML Inputs
+    - [ ] Views
   - [ ] Edit Entry - Update, delete
 - Week 3
   - [ ] Styling
