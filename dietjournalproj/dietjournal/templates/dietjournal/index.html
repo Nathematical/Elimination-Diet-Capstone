@@ -1,11 +1,79 @@
 {% extends 'dietjournal/base.html' %}
 
+{% block style %}
+<style>
+    .row {
+        margin-bottom: 0;
+    }
+</style>
+{% endblock %}
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row center">
         <input type="text" class="datepicker">
+    </div>
+
+    <!-- Modal Trigger -->
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Log Entry</a>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            {% load static %}
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">Sleep</div>
+                    <div class="collapsible-body"><span>Track your sleep patterns.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Meal/Snack</div>
+                    <div class="collapsible-body"><span>Track what you eating and how it makes you feel.</span></div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select>
+                                    <option value="" disabled selected>Select Type:</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Dinner">Dinner</option>
+                                    <option value="Snack">Snack</option>
+                                </select>
+                                <label>Meal Type</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Meal Summary</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Water</div>
+                    <div class="collapsible-body"><span>Track how much water you drink throughout the day.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Medication</div>
+                    <div class="collapsible-body"><span>Track the medications you take.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header">Bowel Movement</div>
+                    <div class="collapsible-body"><span>Everyone poops, but not every keeps a record of it; here's your
+                            chance.</span></div>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -14,7 +82,19 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.datepicker');
-        var instances = M.Datepicker.init(elems, options);
+        var instances = M.Datepicker.init(elems, {});
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, {});
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {});
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, {});
     });
 </script>
 {% endblock %}

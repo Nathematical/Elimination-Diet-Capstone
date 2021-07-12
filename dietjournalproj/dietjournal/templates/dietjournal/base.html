@@ -9,8 +9,7 @@
     <!-- icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<style>
-</style>
+    {% block style %}{% endblock %}
 <header>
     <nav>
         <div class="nav-wrapper">
@@ -40,7 +39,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems, options);
+            var instances = M.Sidenav.init(elems, {});
         });
     </script>
     <!-- Page JS -->
