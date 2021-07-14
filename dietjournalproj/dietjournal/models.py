@@ -17,11 +17,7 @@ class LogEntry(models.Model):
 class Meal(models.Model):
     meal_type = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
-    meal_num = models.IntegerField()
-    food = models.CharField(max_length=200)
-    drink = models.CharField(max_length=200)
-    mood = models.CharField(max_length=200)
-    notes = models.TextField()
+    meal_summary = models.TextField(default='')
     day_time = models.DateTimeField(default=timezone.now)
     log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
 
@@ -29,7 +25,7 @@ class Meal(models.Model):
         return self.meal_type
         
 
-class WaterConsumed(models.Model):
+class Water(models.Model):
     h2o_oz = models.IntegerField()
     day_time = models.DateTimeField(default=timezone.now)
     log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
@@ -40,9 +36,7 @@ class WaterConsumed(models.Model):
 
 class Medication(models.Model):
     name = models.CharField(max_length=200)
-    reason = models.CharField(max_length=200)
     dosage = models.CharField(max_length=200)
-    reaction = models.TextField()
     day_time = models.DateTimeField(default=timezone.now)
     log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
 
@@ -51,11 +45,18 @@ class Medication(models.Model):
 
 
 class BowelMovement(models.Model):
-    bm_num = models.IntegerField()
-    notes = models.TextField()
+    bm_note = models.TextField(default='')
     day_time = models.DateTimeField(default=timezone.now)
     log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.bm_num
 
+class Note(models.Model):
+    subject = models.CharField(max_length=200)
+    note = models.TextField(default='')
+    day_time = models.DateTimeField(default=timezone.now)
+    log_entry = models.ForeignKey(LogEntry, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.subject

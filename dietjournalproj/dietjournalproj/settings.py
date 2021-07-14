@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import django_on_heroku
 from pathlib import Path
 import os
 from . import secrets
@@ -132,3 +133,5 @@ AUTH_USER_MODEL = 'users.User'
 
 MEDIA_URL = '/uploaded_files/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
+
+django_on_heroku.settings(locals())
